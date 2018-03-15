@@ -609,7 +609,6 @@ export default Base =>
       this.setStateWithData(
         {
           filtered: newFiltering,
-            filterInputTextValue: val
         },
         () => (
           onFilteredChange && onFilteredChange(newFiltering, column, value)

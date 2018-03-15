@@ -1165,8 +1165,7 @@ var Methods = (function (Base) {
         });
 
         this.setStateWithData({
-          filtered: newFiltering,
-          filterInputTextValue: val
+          filtered: newFiltering
         }, function () {
           return onFilteredChange && onFilteredChange(newFiltering, column, value);
         });
