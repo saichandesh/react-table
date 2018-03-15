@@ -444,7 +444,10 @@ export default class ReactTable extends Methods(Lifecycle(Component)) {
         ...columnHeaderProps.rest,
       }
 
-      const filter = filtered.find(filter => filter.id === column.id)
+      const filter = filtered.find(filter => {
+        console.log(`filter value : ${filter}`);
+        return (filter.id === column.id)
+      })
 
       const ResolvedFilterComponent = column.Filter || FilterComponent
 

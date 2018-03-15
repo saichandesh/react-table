@@ -229,14 +229,17 @@ export default {
   ),
   TfootComponent: _.makeTemplateComponent('rt-tfoot', 'Tfoot'),
   FilterComponent: ({ filter, onChange }) => (
-    <input
-      type="text"
-      style={{
-        width: '100%',
-      }}
-      value={filter ? filter.value : ''}
-      onChange={event => onChange(event.target.value)}
-    />
+    <div>
+      <div>{(filter) ? filter.value : ''}</div>
+      <input
+        type="text"
+        style={{
+          width: '100%',
+        }}
+        value={filter ? filter.value : ''}
+        onChange={event => onChange(event.target.value)}
+      />
+    </div>
   ),
   ExpanderComponent: ({ isExpanded }) => (
     <div className={classnames('rt-expander', isExpanded && '-open')}>
