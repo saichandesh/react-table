@@ -3260,7 +3260,7 @@ var ReactTable = function (_Methods) {
           }, rest),
           isFilterable ? _.normalizeComponent(ResolvedFilterComponent, {
             column: column,
-            filter: _this2.state.filterInputTextValue,
+            filter: filter,
             onChange: function onChange(value) {
               return _this2.filterColumn(column, value);
             }

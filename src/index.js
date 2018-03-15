@@ -479,7 +479,7 @@ export default class ReactTable extends Methods(Lifecycle(Component)) {
               ResolvedFilterComponent,
               {
                 column,
-                filter: this.state.filterInputTextValue,
+                filter,
                 onChange: value => this.filterColumn(column, value),
               },
               defaultProps.column.Filter,
