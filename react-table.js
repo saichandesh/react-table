@@ -1155,6 +1155,13 @@ var Methods = (function (Base) {
           });
         }
 
+        newFiltering.find(function (filter) {
+          console.log('------in here filter column method------');
+          if (filter.id === column.id) {
+            console.log('value : ' + JSON.stringify(filter));
+          }
+        });
+
         this.setStateWithData({
           filtered: newFiltering
         }, function () {
@@ -3225,7 +3232,10 @@ var ReactTable = function (_Methods) {
         var rest = _extends({}, theadFilterThProps.rest, columnHeaderProps.rest);
 
         var filter = filtered.find(function (filter) {
-          console.log('filter value : ' + filter);
+          console.log('------in here filtered------');
+          if (filter.id === column.id) {
+            console.log('value : ' + JSON.stringify(filter));
+          }
           return filter.id === column.id;
         });
 
