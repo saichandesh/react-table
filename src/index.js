@@ -42,6 +42,7 @@ export default class ReactTable extends Methods(Lifecycle(Component)) {
       resized: props.defaultResized,
       currentlyResizing: false,
       skipNextSort: false,
+      filterInputTextValue: ''
     }
   }
 
@@ -130,6 +131,7 @@ export default class ReactTable extends Methods(Lifecycle(Component)) {
       // Sorted Data
       sortedData,
       currentlyResizing,
+        filterInputTextValue
     } = resolvedState
 
     // Pagination
@@ -477,7 +479,7 @@ export default class ReactTable extends Methods(Lifecycle(Component)) {
               ResolvedFilterComponent,
               {
                 column,
-                filter,
+                filter: this.state.filterInputTextValue,
                 onChange: value => this.filterColumn(column, value),
               },
               defaultProps.column.Filter,

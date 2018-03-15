@@ -582,7 +582,7 @@ export default Base =>
     }
 
     filterColumn (column, value) {
-      const { filtered } = this.getResolvedState()
+      const { filtered, filterInputTextValue } = this.getResolvedState()
       const { onFilteredChange } = this.props
 
       // Remove old filter first if it exists
@@ -597,16 +597,19 @@ export default Base =>
         })
       }
 
-      newFiltering.find(filter => {
+      const val = newFiltering.find(filter => {
           console.log(`------in here filter column method------`);
           if(filter.id === column.id){
-              console.log(`value : ${JSON.stringify(filter)}`)
+              console.log(`value : ${JSON.stringify(filter)}`);
+
           }
+          return (filter.id === column.id);
       })
 
       this.setStateWithData(
         {
           filtered: newFiltering,
+            filterInputTextValue: val
         },
         () => (
           onFilteredChange && onFilteredChange(newFiltering, column, value)

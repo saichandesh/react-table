@@ -1138,7 +1138,8 @@ var Methods = (function (Base) {
       key: 'filterColumn',
       value: function filterColumn(column, value) {
         var _getResolvedState3 = this.getResolvedState(),
-            filtered = _getResolvedState3.filtered;
+            filtered = _getResolvedState3.filtered,
+            filterInputTextValue = _getResolvedState3.filterInputTextValue;
 
         var onFilteredChange = this.props.onFilteredChange;
 
@@ -1155,15 +1156,17 @@ var Methods = (function (Base) {
           });
         }
 
-        newFiltering.find(function (filter) {
+        var val = newFiltering.find(function (filter) {
           console.log('------in here filter column method------');
           if (filter.id === column.id) {
             console.log('value : ' + JSON.stringify(filter));
           }
+          return filter.id === column.id;
         });
 
         this.setStateWithData({
-          filtered: newFiltering
+          filtered: newFiltering,
+          filterInputTextValue: val
         }, function () {
           return onFilteredChange && onFilteredChange(newFiltering, column, value);
         });
@@ -2907,7 +2910,8 @@ var ReactTable = function (_Methods) {
       filtered: props.defaultFiltered,
       resized: props.defaultResized,
       currentlyResizing: false,
-      skipNextSort: false
+      skipNextSort: false,
+      filterInputTextValue: ''
     };
     return _this;
   }
@@ -2994,7 +2998,8 @@ var ReactTable = function (_Methods) {
           headerGroups = resolvedState.headerGroups,
           hasHeaderGroups = resolvedState.hasHeaderGroups,
           sortedData = resolvedState.sortedData,
-          currentlyResizing = resolvedState.currentlyResizing;
+          currentlyResizing = resolvedState.currentlyResizing,
+          filterInputTextValue = resolvedState.filterInputTextValue;
 
       // Pagination
 
@@ -3256,7 +3261,7 @@ var ReactTable = function (_Methods) {
           }, rest),
           isFilterable ? _.normalizeComponent(ResolvedFilterComponent, {
             column: column,
-            filter: filter,
+            filter: _this2.state.filterInputTextValue,
             onChange: function onChange(value) {
               return _this2.filterColumn(column, value);
             }
