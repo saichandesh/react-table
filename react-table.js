@@ -1722,6 +1722,30 @@ var defaultProps = {
   FilterComponent: function FilterComponent(_ref6) {
     var filter = _ref6.filter,
         _onChange = _ref6.onChange;
+
+    var rerender = function rerender() {
+
+      React__default.renderComponent(React__default.createElement(
+        'div',
+        null,
+        React__default.createElement(
+          'div',
+          null,
+          filter ? filter.value : ''
+        ),
+        React__default.createElement('input', {
+          type: 'text',
+          style: {
+            width: '100%'
+          },
+          value: filter ? filter.value : '',
+          onChange: function onChange(event) {
+            _onChange(event.target.value);
+            rerender();
+          }
+        })
+      ));
+    };
     return React__default.createElement(
       'div',
       null,
@@ -1737,7 +1761,8 @@ var defaultProps = {
         },
         value: filter ? filter.value : '',
         onChange: function onChange(event) {
-          return _onChange(event.target.value);
+          _onChange(event.target.value);
+          rerender();
         }
       })
     );

@@ -228,7 +228,28 @@ export default {
     </div>
   ),
   TfootComponent: _.makeTemplateComponent('rt-tfoot', 'Tfoot'),
-  FilterComponent: ({ filter, onChange }) => (
+  FilterComponent: ({ filter, onChange }) => {
+    const rerender = () => {
+
+            React.renderComponent(
+                <div>
+                    <div>{(filter) ? filter.value : ''}</div>
+                    <input
+                        type="text"
+                        style={{
+                            width: '100%',
+                        }}
+                        value={filter ? filter.value : ''}
+                        onChange={event => {
+                            onChange(event.target.value);
+                            rerender();
+                        }}
+                    />
+                </div>
+            );
+
+      }
+    return (
     <div>
       <div>{(filter) ? filter.value : ''}</div>
       <input
@@ -237,10 +258,13 @@ export default {
           width: '100%',
         }}
         value={filter ? filter.value : ''}
-        onChange={event => onChange(event.target.value)}
+        onChange={event => {
+          onChange(event.target.value);
+          rerender();
+        }}
       />
     </div>
-  ),
+  )},
   ExpanderComponent: ({ isExpanded }) => (
     <div className={classnames('rt-expander', isExpanded && '-open')}>
       &bull;
